@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodDeeds.API", "GoodDeeds.API\GoodDeeds.API.csproj", "{491F2CA1-58D9-4420-B1D6-C8F999E5ACDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodDeeds.Core", "GoodDeeds.Core\GoodDeeds.Core.csproj", "{15BA4E94-EDDA-426F-B2B8-3D893A496FCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodDeeds.Infrastructure", "GoodDeeds.Infrastructure\GoodDeeds.Infrastructure.csproj", "{929C7D82-E374-4D7B-817E-92B8B8BD49C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{491F2CA1-58D9-4420-B1D6-C8F999E5ACDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{491F2CA1-58D9-4420-B1D6-C8F999E5ACDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{491F2CA1-58D9-4420-B1D6-C8F999E5ACDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{491F2CA1-58D9-4420-B1D6-C8F999E5ACDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15BA4E94-EDDA-426F-B2B8-3D893A496FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BA4E94-EDDA-426F-B2B8-3D893A496FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BA4E94-EDDA-426F-B2B8-3D893A496FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BA4E94-EDDA-426F-B2B8-3D893A496FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{929C7D82-E374-4D7B-817E-92B8B8BD49C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{929C7D82-E374-4D7B-817E-92B8B8BD49C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{929C7D82-E374-4D7B-817E-92B8B8BD49C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{929C7D82-E374-4D7B-817E-92B8B8BD49C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
