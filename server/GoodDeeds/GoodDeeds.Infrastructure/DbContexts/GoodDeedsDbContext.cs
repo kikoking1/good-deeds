@@ -1,7 +1,7 @@
 ﻿using GoodDeeds.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GoodDeeds.Infrastructure;
+namespace GoodDeeds.Infrastructure.DbContexts;
 
 public class GoodDeedsDbContext : DbContext
 {

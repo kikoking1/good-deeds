@@ -1,10 +1,19 @@
-using Gemstone.CBL.API.Extensions.Services;
+using GoodDeeds.API.Extensions.Services;
+using GoodDeeds.Application.Services;
+using GoodDeeds.Core.Interfaces.Repositories;
+using GoodDeeds.Core.Interfaces.Services;
 using GoodDeeds.Infrastructure;
+using GoodDeeds.Infrastructure.DbContexts;
+using GoodDeeds.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
 // Add services to the container.
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IFamilyMemberService, FamilyMemberService>();
+builder.Services.AddScoped<IFamilyMemberRepository, FamilyMemberRepository>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

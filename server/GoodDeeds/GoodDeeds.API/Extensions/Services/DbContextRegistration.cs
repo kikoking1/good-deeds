@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using GoodDeeds.Infrastructure;
+using GoodDeeds.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gemstone.CBL.API.Extensions.Services;
+namespace GoodDeeds.API.Extensions.Services;
 
 [ExcludeFromCodeCoverage]
 public static class DbContextRegistration
