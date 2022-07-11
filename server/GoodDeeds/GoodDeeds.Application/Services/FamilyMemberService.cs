@@ -39,9 +39,35 @@ public class FamilyMemberService : IFamilyMemberService
         return familyMemberDtos;
     }
     
-    public async Task AddFamilyMemberAsync(FamilyMemberDto familyMemberDto)
+    public async Task<FamilyMemberDto> AddFamilyMemberAsync(FamilyMemberDto familyMemberDto)
     {
         var familyMember = _mapper.Map<FamilyMember>(familyMemberDto);
         await _familyMemberRepository.AddAsync(familyMember);
+
+        _mapper.Map(familyMember, familyMemberDto);
+        
+        return familyMemberDto;
+    }
+
+    public async Task<FamilyMemberDto> UpdateFamilyMemberAsync(FamilyMemberDto familyMemberDto)
+    {
+        var familyMember = await _familyMemberRepository.RetrieveByIdAsync(familyMemberDto.Id);
+        _mapper.Map(familyMemberDto, familyMember);
+        
+        if (familyMember == null)
+        {
+            throw new Exception("Family member does not exist to update");
+        }
+        
+        await _familyMemberRepository.UpdateAsync(familyMember);
+        
+        _mapper.Map(familyMember, familyMemberDto);
+
+        return familyMemberDto;
+    }
+    
+    public void DeleteFamilyMember(string id)
+    {
+        _familyMemberRepository.Delete(id);
     }
 }

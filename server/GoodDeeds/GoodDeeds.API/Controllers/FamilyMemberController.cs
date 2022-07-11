@@ -86,16 +86,63 @@ public class FamilyMemberController : ControllerBase
     {
         try
         {
-            await _familyMemberService.AddFamilyMemberAsync(familyMemberDto);
+            var newFamilyMemberDto = await _familyMemberService.AddFamilyMemberAsync(familyMemberDto);
 
             _logger.LogInformation("Adding Family Member was successful");
-            return NoContent();
+            return Ok(newFamilyMemberDto);
         }
         catch (Exception ex)
         {
             _logger.LogError(
                 ex,
                 "Exception while adding family member"
+            );
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
+    
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdateFamilyMember([FromBody] FamilyMemberDto familyMemberDto)
+    {
+        try
+        {
+            var updatedFamilyMemberDto = await _familyMemberService.UpdateFamilyMemberAsync(familyMemberDto);
+
+            _logger.LogInformation("Updating Family Member was successful");
+            return Ok(updatedFamilyMemberDto);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Exception while updating family member"
+            );
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
+    
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public IActionResult DeleteFamilyMember(string id)
+    {
+        try
+        {
+            _familyMemberService.DeleteFamilyMember(id);
+
+            _logger.LogInformation("Deleting Family Member was successful");
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Exception while deleting family member"
             );
             return StatusCode(StatusCodes.Status500InternalServerError);
         }

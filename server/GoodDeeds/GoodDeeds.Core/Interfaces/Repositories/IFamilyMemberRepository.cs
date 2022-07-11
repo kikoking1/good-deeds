@@ -12,5 +12,5 @@ public interface IFamilyMemberRepository
 
     public Task UpdateAsync(FamilyMember familyMember);
 
-    public void Delete(FamilyMember familyMember);
+    public void Delete(string id);
 }

@@ -43,9 +43,9 @@ public class FamilyMemberRepository : IFamilyMemberRepository
         await _goodDeedsDbContext.SaveChangesAsync();
     }
     
-    public void Delete(FamilyMember familyMember)
+    public void Delete(string id)
     {
-        _goodDeedsDbContext.Remove(_goodDeedsDbContext.FamilyMembers.Single(a => a.Id == familyMember.Id));
+        _goodDeedsDbContext.Remove(_goodDeedsDbContext.FamilyMembers.Single(a => a.Id == id));
         _goodDeedsDbContext.SaveChanges();
     }
     
