@@ -34,6 +34,11 @@ public class FamilyMemberService : IFamilyMemberService
     public async Task<List<FamilyMemberDto>> RetrieveFamilyMembersAsync()
     {
         var familyMembers = await _familyMemberRepository.RetrieveAllAsync();
+        if (!familyMembers.Any())
+        {
+            return new List<FamilyMemberDto>();
+        }
+        
         var familyMemberDtos = _mapper.Map<List<FamilyMemberDto>>(familyMembers);
 
         return familyMemberDtos;

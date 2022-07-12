@@ -1,11 +1,13 @@
-﻿using GoodDeeds.Core.Dtos;
+﻿using AutoMapper;
+using GoodDeeds.API.ResponseModels;
+using GoodDeeds.Core.Dtos;
 using GoodDeeds.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodDeeds.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/family-members")]
 public class FamilyMemberController : ControllerBase
 {
     private readonly IFamilyMemberService _familyMemberService;
@@ -33,7 +35,11 @@ public class FamilyMemberController : ControllerBase
             if (familyMemberDto == null)
             {
                 _logger.LogError("Get Family Member was not successful with id: {id}", id);
-                return BadRequest();
+                return BadRequest(
+                    new ApiError
+                    {
+                        Message = "No member exists with that provided id."
+                    });
             }
             
             _logger.LogInformation("Get Family Member was successful with id: {id}", id);
@@ -53,17 +59,11 @@ public class FamilyMemberController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> RetrieveFamilyMembers()
+    public async Task<IActionResult> RetrieveFamilyMembersAsync()
     {
         try
         {
             var familyMemberDtos = await _familyMemberService.RetrieveFamilyMembersAsync();
-
-            if (!familyMemberDtos.Any())
-            {
-                _logger.LogError("Retrieving Family Members was not successful");
-                return BadRequest();
-            }
             
             _logger.LogInformation("Retrieving Family Members was successful");
             return Ok(familyMemberDtos);
@@ -82,7 +82,7 @@ public class FamilyMemberController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> CreateFamilyMember([FromBody] FamilyMemberDto familyMemberDto)
+    public async Task<IActionResult> CreateFamilyMemberAsync([FromBody] FamilyMemberDto familyMemberDto)
     {
         try
         {
@@ -90,6 +90,18 @@ public class FamilyMemberController : ControllerBase
 
             _logger.LogInformation("Adding Family Member was successful");
             return Ok(newFamilyMemberDto);
+        }
+        catch (AutoMapperMappingException ex)
+        {
+            _logger.LogError(
+                ex,
+                "FamilyMemberDto request body malformed"
+            );
+            return BadRequest(
+                new ApiError
+                {
+                    Message = "Request body malformed"
+                });
         }
         catch (Exception ex)
         {
@@ -105,7 +117,7 @@ public class FamilyMemberController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> UpdateFamilyMember([FromBody] FamilyMemberDto familyMemberDto)
+    public async Task<IActionResult> UpdateFamilyMemberAsync([FromBody] FamilyMemberDto familyMemberDto)
     {
         try
         {
@@ -113,6 +125,18 @@ public class FamilyMemberController : ControllerBase
 
             _logger.LogInformation("Updating Family Member was successful");
             return Ok(updatedFamilyMemberDto);
+        }
+        catch (AutoMapperMappingException ex)
+        {
+            _logger.LogError(
+                ex,
+                "FamilyMemberDto request body malformed"
+            );
+            return BadRequest(
+                new ApiError
+                {
+                    Message = "Request body malformed"
+                });
         }
         catch (Exception ex)
         {
