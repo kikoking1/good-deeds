@@ -175,4 +175,12 @@ public class FamilyMemberServiceTests
         _familyMemberRepository.Verify(mock => mock.RetrieveByIdAsync(It.IsAny<string>()), Times.Once);
         _familyMemberRepository.Verify(mock => mock.UpdateAsync(It.IsAny<FamilyMember>()), Times.Never);
     }
+    
+    [Fact]
+    public void DeleteFamilyMember_Should_Call_DeleteMethod()
+    {
+        _sut.DeleteFamilyMember(It.IsAny<string>());
+
+        _familyMemberRepository.Verify(mock => mock.Delete(It.IsAny<string>()), Times.Once);
+    }
 }
